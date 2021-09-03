@@ -17,6 +17,8 @@ public class BoardSteps extends AbstractSteps{
     private HomePage homePage;
     @Inject
     private BoardDao boardDao;
+    @Inject
+    private  Board board;
 
     @Step
     public void createBoard(Board board){
@@ -32,7 +34,7 @@ public class BoardSteps extends AbstractSteps{
     public void verifyBoardName(String name){
         Board expectedBoard = boardDao.getBoardByName(name);
         Board actualBoard = homePage.getBoardDetails(name);
-        Assert.assertTrue("Name is not as expected!", expectedBoard.toString().equals(actualBoard.toString()));
+        Assert.assertTrue("Board is not as expected!", expectedBoard.equals(actualBoard));
 
     }
 
@@ -43,6 +45,19 @@ public class BoardSteps extends AbstractSteps{
         for(Board board : boards){
             verifyBoardName(board.getName());
         }
+    }
+
+    @Step
+    public void navigateToBoardPage(){
+        waitABit(5000);
+        List<Board> boards = boardDao.getAllBoards();
+        for(Board board : boards){
+            System.out.println(board.getName());
+            waitABit(3000);
+            homePage.clickOnBoard(board.getName());
+        }
+
+
     }
 
 

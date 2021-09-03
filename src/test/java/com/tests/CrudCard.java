@@ -10,11 +10,14 @@ import org.junit.runner.RunWith;
 public class CrudCard extends BaseTest{
 
     @Test
-    public void test() throws InterruptedException {
+    public void testCrudCard(){
         loginSteps.login();
         boardSteps.createBoard(BoardFactory.getBoardInstance());
         navigateToWorkspace();
         boardSteps.verifyBoardsNames();
+        boardSteps.navigateToBoardPage(); //TODO
+
+
 
     }
 }

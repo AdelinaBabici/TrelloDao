@@ -45,22 +45,28 @@ public class HomePage extends BasePage{
         Board board = new Board();
         WebElement boardName = getBoardName(name);
         board.setName(boardName.getText());
-        System.out.println("ccccccc" + board.getName());
         return board;
     }
 
     WebElement getBoardName(String name){
         List<WebElement> boards = getDriver().findElements(By.cssSelector("ul.boards-page-board-section-list > li"));
-        System.out.println(boards.size());
-        for(WebElement elem:boards){
-            System.out.println(elem.getText());
-            if(elem.getText().equalsIgnoreCase(name)){
-                return elem;
+        System.out.println("********"+boards.toString() );
+        for(WebElement board:boards){
+            System.out.println("------"+board.getText());
+            if(board.getText().equalsIgnoreCase(name)){
+                return board;
+
             }
-
         }
-
         return null;
+
     }
 
-}
+    public void clickOnBoard(String name){
+        System.out.println("board NAME is"+getBoardName(name).getText());
+        getBoardName(name).click();
+        }
+
+    }
+
+
